@@ -1,0 +1,50 @@
+@startuml
+class App {
+  +main(String[]): void
+  -agregarCancionAlbum(): void
+  -buscarAlbumesPorAnio():void
+  -mostrarMenuPrincipal(): void
+  -agregarAlbum(): void
+  -verCancionesAlbum(): void
+}
+
+class BibliotecaMusical {
+  -albumes: List<Album>
+  +buscarAlbumesPorAnio(anio: int): List<Album>
+  +buscarAlbumPorNombre(nombre: String): Album
+  +agregarAlbum(album: Album): boolean
+  +mostrarAlbumes(): void
+}
+
+class Album {
+  -nombre: String
+  -anioDeLanzamiento: int
+  -disquera: String
+  -artista: String
+  -canciones: List<Cancion>
+  +getNombre(): String
+  +getAnioDeLanzamiento(): int
+  +getDisquera(): String
+  +getArtista(): String
+  +getCanciones(): List<Cancion>
+  +agregarCancion(cancion: Cancion): boolean
+  +toString(): String
+}
+
+class Cancion {
+  -titulo: String
+  -duracion: double
+  +getTitulo(): String
+  +getDuracion(): double
+  +toString(): String
+}
+
+App "1" *---> "1 bibliotecaMusical" BibliotecaMusical
+BibliotecaMusical "1" *---> "*albumes" Album
+Album "1" *---> "*canciones" Cancion
+
+App ...> Album: <<crea>>
+BibliotecaMusical <...> Cancion : <<crea>>
+
+
+@enduml
