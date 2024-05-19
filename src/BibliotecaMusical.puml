@@ -23,7 +23,7 @@ class BibliotecaMusical {
   +mostrarAlbumes(): void
 }
 
-Album "1" --> "1..*" Cancion : contiene
-BibliotecaMusical "1" --> "1..*" Album : contiene
+Album "1" --> "1..*" Cancion : tiene
+BibliotecaMusical "1" --> "1..*" Album : tiene
 
 @enduml
