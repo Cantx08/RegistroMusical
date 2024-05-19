@@ -7,13 +7,15 @@ Este proyecto es una aplicación de consola en Java que permite a los usuarios a
 - Java 8 o superior
 
 ## Estructura del proyecto
+
+
 biblioteca-musical/
 ├── src/
 │   ├── Album.java
 │   ├── BibliotecaMusical.java
 │   ├── Cancion.java
 │   └── Main.java
-└── README.md
+
 
 ## Clases
 
