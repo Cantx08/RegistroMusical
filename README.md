@@ -9,24 +9,6 @@ biblioteca-musical/
 │ ├── BibliotecaMusical.java
 │ ├── Cancion.java
 │ └── Main.java
-## Guías de Instalación y Configuración
-
-Asegúrese de tener Java 8 o una versión superior instalada en su sistema.
-Clone este repositorio o descargue el código fuente.
-Navegue hasta el directorio raíz del proyecto.
-Compile las clases Java utilizando el siguiente comando: javac src/*.java
-Ejecute la aplicación con el siguiente comando: java src/Main
-
-## Notas de la Versión
-Versión 1.0.0 (Mayo 2023)
-
-Funcionalidad inicial para administrar una biblioteca de álbumes musicales.
-Permite agregar álbumes con información básica (nombre, año de lanzamiento, disquera y artista).
-Permite agregar canciones a un álbum existente, con título y duración.
-Evita agregar canciones duplicadas a un álbum.
-Muestra la lista de canciones de un álbum específico.
-Permite buscar álbumes por año de lanzamiento.
-
 ## Clases
 ### Album
 Esta clase representa un álbum musical y contiene los siguientes atributos:
@@ -46,18 +28,14 @@ Esta clase representa la biblioteca musical y proporciona las siguientes funcion
 - agregarAlbum: Agrega un nuevo álbum a la biblioteca.
 - mostrarAlbumes: Muestra una lista de todos los álbumes en la biblioteca.
 ## Uso
-
-Compilar las clases Java.
-Ejecutar la clase Main.
-Seguir las instrucciones en la consola para interactuar con la biblioteca musical.
-
+1. Compilar las clases Java.
+2. Ejecutar la clase Main.
+3. Seguir las instrucciones en la consola para interactuar con la biblioteca musical.
 ## Historias de usuario
-
-HU1: Como usuario, quiero poder agregar un nuevo álbum con su información básica (nombre, año de lanzamiento, disquera y artistas) para mantener un registro de la música que escucho.
-HU2: Como usuario, quiero poder agregar canciones a un álbum existente, proporcionando el título de la canción y su duración en minutos, para mantener un registro completo de todas las canciones en un álbum.
-HU3: Como usuario, quiero que el sistema evite que agregue canciones con títulos repetidos a un álbum, para mantener la integridad de la información.
-HU4: Como usuario, quiero poder ver la lista de canciones de un álbum específico, junto con su duración, para conocer la composición del álbum.
-HU5: Como usuario, quiero poder buscar álbumes por el año para encontrar rápidamente la información que estoy buscando.
-
+1. HU1: Como usuario, quiero poder agregar un nuevo álbum con su información básica (nombre, año de lanzamiento, disquera y artistas) para mantener un registro de la música que escucho.
+2. HU2: Como usuario, quiero poder agregar canciones a un álbum existente, proporcionando el título de la canción y su duración en minutos, para mantener un registro completo de todas las canciones en un álbum.
+3. HU3: Como usuario, quiero que el sistema evite que agregue canciones con títulos repetidos a un álbum, para mantener la integridad de la información.
+4. HU4: Como usuario, quiero poder ver la lista de canciones de un álbum específico, junto con su duración, para conocer la composición del álbum.
+5. HU5: Como usuario, quiero poder buscar álbumes por el año para encontrar rápidamente la información que estoy buscando.
 ## Contribución
 Si deseas contribuir a este proyecto, puedes hacer un fork del repositorio, crear una rama con tus cambios y enviar un pull request.
