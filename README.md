@@ -8,14 +8,14 @@ Este proyecto es una aplicación de consola en Java que permite a los usuarios a
 
 ## Estructura del proyecto
 
-```plaintext
+
 biblioteca-musical/
 ├── src/
 │   ├── Album.java
 │   ├── BibliotecaMusical.java
 │   ├── Cancion.java
 │   └── Main.java
-└── README.md
+
 
 ## Clases
 
