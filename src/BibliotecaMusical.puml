@@ -1,0 +1,29 @@
+@startuml
+
+class Album {
+  -nombre: String
+  -anioDeLanzamiento: int
+  -disquera: String
+  -artista: String
+  -canciones: List<Cancion>
+  +agregarCancion(cancion: Cancion): boolean
+  +getCanciones(): List<Cancion>
+}
+
+class Cancion {
+  -titulo: String
+  -duracion: double
+}
+
+class BibliotecaMusical {
+  -albumes: List<Album>
+  +buscarAlbumesPorAnio(anio: int): List<Album>
+  +buscarAlbumPorNombre(nombre: String): Album
+  +agregarAlbum(album: Album): boolean
+  +mostrarAlbumes(): void
+}
+
+Album "1" --> "1..*" Cancion : contiene
+BibliotecaMusical "1" --> "1..*" Album : contiene
+
+@enduml
