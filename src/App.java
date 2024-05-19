@@ -1,13 +1,24 @@
 import javax.swing.*;
 import java.util.Optional;
 
+/**
+ * Clase principal que contiene el menú de la Biblioteca Musical.
+ */
 public class App {
     private static final BibliotecaMusical bibliotecaMusical = new BibliotecaMusical();
 
+    /**
+     * Método principal que inicia la aplicación mostrando el menú principal.
+     *
+     * @param args Los argumentos de línea de comando (no se utilizan en esta aplicación).
+     */
     public static void main(String[] args) {
         mostrarMenuPrincipal();
     }
 
+    /**
+     * Muestra el menú principal de la aplicación y maneja las opciones seleccionadas por el usuario.
+     */
     private static void mostrarMenuPrincipal() {
         String[] opciones = {"Agregar álbum", "Agregar canción a álbum", "Ver canciones de álbum", "Buscar álbumes por año", "Salir"};
         int opcionSeleccionada = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Biblioteca Musical", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
@@ -35,6 +46,9 @@ public class App {
         mostrarMenuPrincipal();
     }
 
+    /**
+     * Solicita al usuario los datos para agregar un nuevo álbum a la biblioteca musical.
+     */
     private static void agregarAlbum() {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del álbum");
         int anioDeLanzamiento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año de lanzamiento"));
@@ -46,6 +60,9 @@ public class App {
         JOptionPane.showMessageDialog(null, "Álbum agregado exitosamente");
     }
 
+    /**
+     * Solicita al usuario los datos para agregar una nueva canción a un álbum existente.
+     */
     private static void agregarCancionAlbum() {
         String nombreAlbum = JOptionPane.showInputDialog("Ingrese el nombre del álbum al que desea agregar la canción");
         Album albumSeleccionado = bibliotecaMusical.buscarAlbumPorNombre(nombreAlbum);
@@ -61,6 +78,9 @@ public class App {
         }
     }
 
+    /**
+     * Solicita al usuario el nombre de un álbum y muestra las canciones que contiene.
+     */
     private static void verCancionesAlbum() {
         String nombreAlbum = JOptionPane.showInputDialog("Ingrese el nombre del álbum que desea ver");
         Album albumSeleccionado = bibliotecaMusical.buscarAlbumPorNombre(nombreAlbum);
@@ -76,6 +96,9 @@ public class App {
         }
     }
 
+    /**
+     * Solicita al usuario un año y muestra los álbumes lanzados en ese año.
+     */
     private static void buscarAlbumesPorAnio() {
         String anioCadena = JOptionPane.showInputDialog("Ingrese el año de los álbumes que desea buscar");
         int anio = Optional.ofNullable(anioCadena)
