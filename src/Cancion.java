@@ -1,6 +1,6 @@
 public class Cancion {
-    private String titulo;
-    private double duracion;
+    private final String titulo;
+    private final double duracion;
 
     public Cancion(String titulo, double duracion) {
         this.titulo = titulo;
@@ -15,11 +15,8 @@ public class Cancion {
         return duracion;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public void setDuracion(double duracion) {
-        this.duracion = duracion;
+    @Override
+    public String toString() {
+        return "Título: " + titulo + ", Duración: " + duracion + " minutos";
     }
 }

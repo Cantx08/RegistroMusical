@@ -1,85 +1,95 @@
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
-import javax.swing.JList;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.util.Optional;
 
 public class App {
+    private static final BibliotecaMusical bibliotecaMusical = new BibliotecaMusical();
+
     public static void main(String[] args) {
-        BibliotecaMusical biblioteca = new BibliotecaMusical(new ArrayList<>());
+        mostrarMenuPrincipal();
+    }
 
-        while (true) {
-            String[] opciones = { "Agregar álbum", "Agregar canción a álbum", "Ver canciones de álbum",
-                    "Buscar álbumes por año", "Salir" };
-            JList<String> listaOpciones = new JList<>(opciones);
-            JOptionPane.showMessageDialog(null, listaOpciones, "Biblioteca Musical", JOptionPane.PLAIN_MESSAGE);
-            int opcionSeleccionada = listaOpciones.getSelectedIndex();
+    private static void mostrarMenuPrincipal() {
+        String[] opciones = {"Agregar álbum", "Agregar canción a álbum", "Ver canciones de álbum", "Buscar álbumes por año", "Salir"};
+        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Biblioteca Musical", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
 
-            String nombreAlbum;
-            Album albumSeleccionado;
+        switch (opcionSeleccionada) {
+            case 0:
+                agregarAlbum();
+                break;
+            case 1:
+                agregarCancionAlbum();
+                break;
+            case 2:
+                verCancionesAlbum();
+                break;
+            case 3:
+                buscarAlbumesPorAnio();
+                break;
+            case 4:
+                System.exit(0);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opción inválida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-            switch (opcionSeleccionada + 1) {
-                case 1:
-                    String nombre = JOptionPane.showInputDialog("Ingrese el nombre del álbum");
-                    int anioDeLanzamiento = Integer
-                            .parseInt(JOptionPane.showInputDialog("Ingrese el año de lanzamiento"));
-                    String disquera = JOptionPane.showInputDialog("Ingrese la disquera");
-                    String artista = JOptionPane.showInputDialog("Ingrese el artista");
-                    Album album = new Album(nombre, anioDeLanzamiento, disquera, artista, new ArrayList<>());
-                    biblioteca.agregarAlbum(album);
-                    JOptionPane.showMessageDialog(null, "Álbum agregado exitosamente");
-                    break;
+        mostrarMenuPrincipal();
+    }
 
-                case 2:
-                    nombreAlbum = JOptionPane
-                            .showInputDialog("Ingrese el nombre del álbum al que desea agregar la canción");
-                    albumSeleccionado = biblioteca.buscarAlbumPorNombre(nombreAlbum);
-                    if (albumSeleccionado != null) {
-                        String tituloCancion = JOptionPane.showInputDialog("Ingrese el título de la canción");
-                        double duracionCancion = Double.parseDouble(
-                                JOptionPane.showInputDialog("Ingrese la duración de la canción en minutos"));
-                        Cancion cancion = new Cancion(tituloCancion, duracionCancion);
-                        albumSeleccionado.agregarCancion(cancion);
-                        JOptionPane.showMessageDialog(null, "Canción agregada exitosamente al álbum");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El álbum ingresado no existe");
-                    }
-                    break;
+    private static void agregarAlbum() {
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del álbum");
+        int anioDeLanzamiento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año de lanzamiento"));
+        String disquera = JOptionPane.showInputDialog("Ingrese la disquera");
+        String artista = JOptionPane.showInputDialog("Ingrese el artista");
 
-                case 3:
-                    nombreAlbum = JOptionPane.showInputDialog("Ingrese el nombre del álbum que desea ver");
-                    albumSeleccionado = biblioteca.buscarAlbumPorNombre(nombreAlbum);
-                    if (albumSeleccionado != null) {
-                        ArrayList<Cancion> canciones = albumSeleccionado.obtenerCanciones();
-                        String listaCanciones = canciones.stream()
-                                .map(c -> "Título: " + c.getTitulo() + ", Duración: " + c.getDuracion())
-                                .collect(Collectors.joining("\n"));
-                        JOptionPane.showMessageDialog(null, listaCanciones);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El álbum ingresado no existe");
-                    }
-                    break;
+        Album album = new Album(nombre, anioDeLanzamiento, disquera, artista);
+        bibliotecaMusical.agregarAlbum(album);
+        JOptionPane.showMessageDialog(null, "Álbum agregado exitosamente");
+    }
 
-                case 4:
-                    int anio = Integer
-                            .parseInt(JOptionPane.showInputDialog("Ingrese el año de los álbumes que desea buscar"));
-                    ArrayList<Album> albumesEncontrados = biblioteca.buscarAlbumesPorAnio(anio);
-                    if (!albumesEncontrados.isEmpty()) {
-                        String listaAlbumes = albumesEncontrados.stream()
-                                .map(a -> "Nombre: " + a.getNombre() + ", Año de lanzamiento: "
-                                        + a.getAnioDeLanzamiento())
-                                .collect(Collectors.joining("\n"));
-                        JOptionPane.showMessageDialog(null, listaAlbumes);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontraron álbumes para el año ingresado");
-                    }
-                    break;
-                case 5:
-                    System.exit(0);
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Opción inválida");
+    private static void agregarCancionAlbum() {
+        String nombreAlbum = JOptionPane.showInputDialog("Ingrese el nombre del álbum al que desea agregar la canción");
+        Album albumSeleccionado = bibliotecaMusical.buscarAlbumPorNombre(nombreAlbum);
+
+        if (albumSeleccionado != null) {
+            String tituloCancion = JOptionPane.showInputDialog("Ingrese el título de la canción");
+            double duracionCancion = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la duración de la canción en minutos"));
+            Cancion cancion = new Cancion(tituloCancion, duracionCancion);
+            albumSeleccionado.agregarCancion(cancion);
+            JOptionPane.showMessageDialog(null, "Canción agregada exitosamente al álbum");
+        } else {
+            JOptionPane.showMessageDialog(null, "El álbum ingresado no existe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static void verCancionesAlbum() {
+        String nombreAlbum = JOptionPane.showInputDialog("Ingrese el nombre del álbum que desea ver");
+        Album albumSeleccionado = bibliotecaMusical.buscarAlbumPorNombre(nombreAlbum);
+
+        if (albumSeleccionado != null) {
+            StringBuilder listaCanciones = new StringBuilder();
+            for (Cancion cancion : albumSeleccionado.getCanciones()) {
+                listaCanciones.append("Título: ").append(cancion.getTitulo()).append(", Duración: ").append(cancion.getDuracion()).append(" minutos\n");
             }
+            JOptionPane.showMessageDialog(null, listaCanciones.toString(), "Canciones del álbum", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El álbum ingresado no existe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static void buscarAlbumesPorAnio() {
+        String anioCadena = JOptionPane.showInputDialog("Ingrese el año de los álbumes que desea buscar");
+        int anio = Optional.ofNullable(anioCadena)
+                .map(Integer::parseInt)
+                .orElse(0);
+
+        if (anio != 0) {
+            StringBuilder listaAlbumes = new StringBuilder();
+            for (Album album : bibliotecaMusical.buscarAlbumesPorAnio(anio)) {
+                listaAlbumes.append("Nombre: ").append(album.getNombre()).append(", Año de lanzamiento: ").append(album.getAnioDeLanzamiento()).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, listaAlbumes.toString(), "Álbumes del año " + anio, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El año ingresado no es válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
